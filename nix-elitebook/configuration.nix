@@ -74,6 +74,7 @@
   };
 
   programs.firefox.enable = true; # firefox
+  services.flatpak.enable = true; # flatpak
 
   # unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -86,14 +87,7 @@
  environment.systemPackages = with pkgs; [ 
     # tools
     wget fastfetch git tree bat
-    zip unzip curl 
-
-    # security - tools
-    nmap netscanner lynis
- 
-    # tools - tui 
-    lazygit lazydocker gtrash wikiman duf
-    btop htop neovim vim 
+    zip unzip curl vim neovim
   ];
   
  # fonts
@@ -106,6 +100,5 @@
   services.openssh.enable = true;
  
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # flakes
-
   system.stateVersion = "25.05"; 
 }
