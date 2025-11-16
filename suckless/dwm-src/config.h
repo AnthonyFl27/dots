@@ -69,7 +69,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } }, // lanzador dmenu
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } }, // terminal
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = flameshotcmd } }, // flameshot (capturas)
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = flameshotcmd } }, // flameshot (screenshot)
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = -1 } },
