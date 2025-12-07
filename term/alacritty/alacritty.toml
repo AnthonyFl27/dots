@@ -6,7 +6,7 @@ thickness = 0.2
 unfocused_hollow = false
 
 [font]
-size = 8
+size = 11
 
 [font.bold]
 family = "Iosevka"
@@ -31,9 +31,11 @@ program = "/bin/bash"
 x = 30
 y = 30
 
-#[window.scrolling]
-#history = 15
+[window]
+opacity = 0.99
 
 [general]
-import = ["themes/mountain.toml"]
+import = ["themes/jellybeans.toml"]
 
+[env]
+TERM = "xterm-256color"
