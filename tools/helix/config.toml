@@ -1,0 +1,14 @@
+# main config helix editor
+
+# theme 
+theme = "base16_default_dark"
+
+[keys.insert]
+esc = ["collapse_selection", "normal_mode"]
+
+[keys.normal.space]
+q = ":quit"
+w = ":write"
+v = ":vsplit"
+h = ":hsplit"
+
