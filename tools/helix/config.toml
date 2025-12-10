@@ -3,12 +3,22 @@
 # theme 
 theme = "base16_default_dark"
 
+[editor]
+true-color = true
+line-number = "relative"
+mouse = true
+bufferline = "always"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
 [keys.insert]
 esc = ["collapse_selection", "normal_mode"]
 
 [keys.normal.space]
-q = ":quit"
+q = ":quit!"
 w = ":write"
 v = ":vsplit"
 h = ":hsplit"
-
