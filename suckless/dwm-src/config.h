@@ -14,7 +14,7 @@ static const char col_sel_fg[]	   = "#868686";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_fg, col_bg, col_bg },
-        [SchemeSel]  = { col_sel_fg, col_sel_bg,  col_sel_bg  },
+  [SchemeSel]  = { col_sel_fg, col_sel_bg,  col_sel_bg  },
 };
 
 /* tagging */
@@ -59,6 +59,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg, "-nf", col_fg, "-sb", col_sel_bg, "-sf", col_fg, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static char *flameshotcmd[] = { "flameshot", "gui", NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
 
 static const char *const autostart[] = {
     "status.sh", NULL,
@@ -67,7 +68,8 @@ static const char *const autostart[] = {
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } }, // lanzador dmenu
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } }, // lanzador dmenu
+	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } }, // rofi launcher
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } }, // terminal
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = flameshotcmd } }, // flameshot (screenshot)
 	{ MODKEY,                       XK_b,      togglebar,      {0} },

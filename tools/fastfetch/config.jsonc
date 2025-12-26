@@ -36,7 +36,11 @@
     },
     {
       "type": "memory",
-      "key": "│   └── Memory"
+      "key": "│   ├── Memory"
+    },
+    {
+      "type": "battery",
+      "key": "│   └── Battery"
     },
 
     {
@@ -49,8 +53,9 @@
     },
     {
       "type": "de",
-      "key": "│   ├── DE"
+      "key": "│   └── DE"
     },
+
     {
       "type": "shell",
       "key": "├── Shell"
@@ -66,6 +71,12 @@
     {
       "type": "packages",
       "key": "└── Packages"
+    },
+    "break",
+    {
+      "type": "colors",
+      "paddingLeft": 4,
+      "symbol": "block"
     }
   ]
 }

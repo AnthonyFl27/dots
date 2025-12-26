@@ -3,13 +3,14 @@
 Paquetes necesarios para la instalación y compilación de DWM `git base-devel libx11-devel libxft-devel libxinerama-devel`
 
 **Otros paquetes y fuente utilizada**
-- Terminal: Alacritty 
+- Terminal: Alacritty
+- Launcher: Rofi 
 - Font: Iosevka 
 - Screenshot: Flameshot 
 
 **Control** 
 - Brillo: `brightnessctl`
-- Sonido: `alsa-utils pamixer`
+- Sonido: `pamixer`
 
 
 **Atajos de teclado**
@@ -17,7 +18,7 @@ Paquetes necesarios para la instalación y compilación de DWM `git base-devel l
 | Atajo             | Acción                 |
 | ----------------- | ---------------------- |
 | Super + Enter     | Alacritty              |
-| Super + Space     | Dmenu                  |
+| Super + Space     | Rofi launcher          |
 | Super + Shift + q | Salir de dwm           |
 | Super + T         | Modo tiling            |
 | Super + F         | Modo flotante          |
@@ -27,4 +28,4 @@ Paquetes necesarios para la instalación y compilación de DWM `git base-devel l
 
 
 
-![Dwm](./arch_dwm.png)
+![Dwm](./void-dwm.png)

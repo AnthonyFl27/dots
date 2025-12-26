@@ -3,7 +3,7 @@
 
 configuration {
  modi: "window,drun,ssh,combi";
- font: "Iosevka 10";
+ font: "Iosevka 12";
  combi-modi: "window,drun,ssh";
  display-drun: "Open";
 }

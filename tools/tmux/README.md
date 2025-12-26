@@ -21,11 +21,3 @@ Aplicar configuraciones, ingresando a `tmux` en la terminal y ejecutando `Ctrl +
 | Ctrl + a + x         | Cerrar panel o ventana      |
 | Ctrl + a + w         | Resumen de la session       |
 |                      |                             |
-#### Vim copy mode
-
-| Atajo         | Acción                           |
-| ------------- | -------------------------------- |
-| Ctrl + c      | Entrar al modo copy vim          |
-| v             | Activamos la selección de texto  |
-| Direccionales | Para copiar y salir              |
-| Ctrl + P      | Para pegar dentro de la terminal |

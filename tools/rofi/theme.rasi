@@ -4,8 +4,8 @@
  * Copyright: Rasmus Steinnke
  ******************************************************************************/
 * {
-    selected-normal-foreground:  #c5c9c5;
-    foreground:                  #c5c9c5;
+    selected-normal-foreground:  #868686;
+    foreground:                  #868686;
     normal-foreground:           @foreground;
     alternate-normal-background: @background;
     red:                         #c4746e;
@@ -17,19 +17,19 @@
     lightbg:                     @background;
     selected-active-foreground:  @selected-normal-foreground;
     alternate-active-background: @background;
-    background:                  #181616;
+    background:                  #141414;
     bordercolor:                 @background;
     alternate-normal-foreground: @foreground;
     normal-background:           @background;
     lightfg:                     @foreground;
-    selected-normal-background:  #282727;
+    selected-normal-background:  #252525;
     border-color:                @background;
     spacing:                     2;
     separatorcolor:              @selected-normal-background;
     urgent-background:           @background;
     selected-urgent-background:  @selected-normal-background;
     alternate-urgent-foreground: @foreground;
-    background-color:            #181616;
+    background-color:            #141414;
     alternate-active-foreground: @foreground;
     active-background:           @background;
     selected-active-background:  @selected-normal-background;
@@ -42,7 +42,9 @@ textbox-prompt-colon {
 window {
     background-color: @background;
     border:           1;
-    padding:          20;
+    width:            25%;
+    padding:          15;
+    height:           45%;
 }
 mainbox {
     border:  0;

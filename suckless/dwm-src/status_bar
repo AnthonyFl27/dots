@@ -19,16 +19,6 @@ get_brightness() {
     fi
 }
 
-# updates void linux 
-get_updates(){
-    updates=$(xbps-install -un 2>/dev/null | wc -l)
-    if [ "$updates" -gt 0 ]; then
-        else
-        echo "UPD: 0"
-    fi
-}
-
-counter = 0 
 while true; do
   BATTERY=$(cat /sys/class/power_supply/BAT0/capacity 2> /dev/null)
   TIME=$(date "+%I:%M %p")
@@ -36,14 +26,6 @@ while true; do
   wifi_info=$(get_wifi_info)
   BRIGHTNESS=$(get_brightness)
 
-  if [ $((counter % 2000)) -eq 0 ]; then
-      UPDATES=$(get_updates)
-      counter=0
-  fi 
-  
   # Mostrar el estado
-  xsetroot -name "$UPDATES | $TIME | VOL: $VOLUME | BRI: $BRIGHTNESS% | BAT: $BATTERY% | $wifi_info"
-
-  sleep 1
-  ((counter++))
+  xsetroot -name " $TIME | VOL: $VOLUME | BRI: $BRIGHTNESS% | BAT: $BATTERY% | $wifi_info "
 done
