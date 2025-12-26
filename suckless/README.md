@@ -11,7 +11,7 @@ Paquetes necesarios para la instalación y compilación de DWM `git base-devel l
 **Control** 
 - Brillo: `brightnessctl`
 - Sonido: `pamixer`
-
+- Wifi: `wireless_tools`
 
 **Atajos de teclado**
 
