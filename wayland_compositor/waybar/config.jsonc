@@ -1,32 +1,44 @@
 // -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 32, // Waybar height (to be removed for auto height)
-    // "width": 1080, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
+    "height": 32,
+    "spacing": 0, // Bajamos el spacing a 0 para controlar los espacios manualmente
 
-"modules-left": [
-	"wlr/taskbar"
+    "modules-left": [
+        "wlr/taskbar"
     ],
-    "modules-center": [ 
-    ],
+    "modules-center": [],
     "modules-right": [
-	"clock"
+        "pulseaudio",
+        "battery",
+        "clock"
     ],
-    
+
     "clock": {
-    "format": "{:%a %b %d, %I:%M %p}"
+        "format": "{:%a %b %d, %I:%M %p}"
     },
 
     "wlr/taskbar": {
-    "format": "{app_id}",
-    "on-click": "minimize-raise",
-    "on-click-right": "close"
+        "format": "{app_id}",
+        "on-click": "minimize-raise",
+        "on-click-right": "close"
+    },
+
+    "pulseaudio": {
+        "format": "VOL {volume}% |",
+        "format-muted": "MUTED |",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle", // Alternar mute/unmute
+        "on-click-right": "pavucontrol", // Clic derecho para el mezclador
+        "scroll-step": 5,
+        "interval": 1
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "BAT: {capacity}% |",
+        "format-charging": "CHR: {capacity}% |",
+        "format-plugged": "PLUG: {capacity}% |"
     }
-/*"custom/applications": {
-    "format": "applications",
-    "on-click": "exec rofi -show drun"
-    }*/
 }

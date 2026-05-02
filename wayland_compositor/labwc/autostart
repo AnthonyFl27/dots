@@ -2,9 +2,9 @@
 #swaybg -c '#c5c9c5' >/dev/null 2>&1 &
 
 # wallpaper
-swaybg -i /home/anthony/Imágenes/walls/desktop.jpg -m fill &
+swaybg -i /home/anthony/Imágenes/walls/29-branches.png -m fill &
 
-wlr-randr --output HDMI-A-2 --mode 1920x1080@180.000000 &
+#wlr-randr --output HDMI-A-2 --mode 1920x1080@180.000000 &
 
 # Launch waybar
 waybar &
