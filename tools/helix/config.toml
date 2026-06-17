@@ -18,7 +18,8 @@ select = "underline"
 esc = ["collapse_selection", "normal_mode"]
 
 [keys.normal.space]
-q = ":quit!"
-w = ":write"
-v = ":vsplit"
-h = ":hsplit"
+q = ":quit!"  # exit
+w = ":write"  # save 
+v = ":vsplit" #split vertical
+h = ":hsplit" #split horizontal
+e = "file_explorer" # file explorer 
