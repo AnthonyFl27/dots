@@ -1,0 +1,12 @@
+mode=drun
+show=drun
+prompt=Open
+width=25%
+height=45%
+location=center
+hide_scroll=false
+allow_markup=true
+allow_images=true
+sort_order=default
+no_actions=false
+filter_rate=100
