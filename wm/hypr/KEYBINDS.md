@@ -8,6 +8,7 @@
 | `Super + Q` | Cerrar ventana |
 | `Super + V` | Toggle flotante |
 | `Super + Shift + Q` | Salir de Hyprland |
+| `Super + Shift + L` | Bloquear pantalla |
 | `Super + Shift + R` | Recargar config |
 
 ## Mouse
@@ -37,8 +38,8 @@
 
 | Atajo | Accion |
 |---|---|
-| `Super + J` | Siguiente ventana |
-| `Super + K` | Ventana anterior |
+| `Super + Up` | Ventana anterior |
+| `Super + Down` | Siguiente ventana |
 
 ### Master layout
 
@@ -51,7 +52,9 @@
 
 | Atajo | Accion |
 |---|---|
-| `Super + Left/Right/Up/Down` | Mover foco direccional |
+| `Super + Left/Right` | Mover foco direccional |
+| `Super + Up` | Ventana anterior (ciclo) |
+| `Super + Down` | Siguiente ventana (ciclo) |
 
 ### Scrolling layout
 
@@ -61,15 +64,6 @@
 | `Super + Ctrl + Right` | Agrandar columna |
 | `Super + Ctrl + P` | Promover ventana a columna propia |
 | `Super + Ctrl + O` | Consolidar/expulsar ventana |
-
-## Tabbed (grupos)
-
-| Atajo | Accion |
-|---|---|
-| `Super + G` | Agrupar/desagrupar ventana |
-| `Super + Shift + G` | Sacar ventana del grupo |
-| `Super + Tab` | Siguiente tab |
-| `Super + Shift + Tab` | Tab anterior |
 
 ## Volume
 
