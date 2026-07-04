@@ -1,0 +1,70 @@
+* {
+    font-family: "Iosevka";
+    font-size: 12px;
+}
+
+#window {
+    background-color: #141414;
+    border: 1px solid #141414;
+    border-radius: 0px;
+}
+
+#outer-box {
+    padding: 15px;
+}
+
+#input {
+    background-color: #141414;
+    border: 1px dashed #252525;
+    color: #868686;
+    padding: 1px;
+    margin-bottom: 0px;
+}
+
+#input image {
+    color: #868686;
+}
+
+#input text {
+    color: #868686;
+}
+
+#inner-box {
+    margin-top: 4px;
+}
+
+#scroll {
+    border: 2px dashed #252525;
+    padding: 2px 0px 0px;
+}
+
+#entry {
+    padding: 4px 4px 4px 10px;
+    background-color: #141414;
+    color: #868686;
+}
+
+#entry:selected {
+    background-color: #252525;
+    color: #868686;
+}
+
+#text {
+    background-color: inherit;
+    color: inherit;
+}
+
+#img {
+    background-color: inherit;
+}
+
+#scroll scrollbar {
+    background-color: #141414;
+    border: none;
+}
+
+#scroll slider {
+    background-color: #252525;
+    min-width: 4px;
+    border-radius: 0px;
+}
