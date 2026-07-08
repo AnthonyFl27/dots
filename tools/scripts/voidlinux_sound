@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Script para solucionar audio en Void Linux - HP-ELITEBOOK-840-G6
+
+set -e
+
+echo "Iniciando solución de audio en Void Linux..."
+
+# Verificar permisos de root
+if [[ $EUID -ne 0 ]]; then
+   echo "Este script debe ejecutarse como root"
+   exit 1
+fi
+
+# Instalar paquetes
+echo "Instalando paquetes necesarios..."
+sudo xbps-install -S alsa-plugins-pulseaudio pulseaudio alsa-utils sof-firmware
+
+# Configurar alsa-base
+echo "Configurando tarjeta de sonido..."
+echo "options snd-hda-intel dmic_detect=0" | sudo tee -a /etc/modprobe.d/alsa-base.conf
+
+echo "Configuración completada. El sistema se reiniciará en 10 segundos..."
+sleep 10
+
+# Reiniciar
+sudo reboot
