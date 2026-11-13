@@ -14,14 +14,14 @@ fi
 
 # Instalar paquetes
 echo "Instalando paquetes necesarios..."
-sudo xbps-install -S alsa-plugins-pulseaudio pulseaudio alsa-utils sof-firmware
+doas xbps-install -S alsa-plugins-pulseaudio pulseaudio alsa-utils sof-firmware
 
 # Configurar alsa-base
 echo "Configurando tarjeta de sonido..."
-echo "options snd-hda-intel dmic_detect=0" | sudo tee -a /etc/modprobe.d/alsa-base.conf
+echo "options snd-hda-intel dmic_detect=0" | doas tee -a /etc/modprobe.d/alsa-base.conf
 
 echo "Configuración completada. El sistema se reiniciará en 10 segundos..."
 sleep 10
 
 # Reiniciar
-sudo reboot
+doas reboot
