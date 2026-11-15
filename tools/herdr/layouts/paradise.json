@@ -26,21 +26,27 @@
           "type": "column",
           "children": [
             {
-              "id": "spaces",
+              "id": "tree",
               "type": "block",
               "content": {
-                "mod": "spaces"
+                "mod": "my-tree",
+                "props": {
+                  "part": "tree"
+                }
               },
               "size": {
-                "weight": 1
+                "weight": 2
               },
-              "min": 90
+              "min": 120
             },
             {
               "id": "agents",
               "type": "block",
               "content": {
-                "mod": "agents"
+                "mod": "my-tree",
+                "props": {
+                  "part": "agents"
+                }
               },
               "size": {
                 "weight": 1
@@ -48,6 +54,20 @@
               "min": 90
             }
           ]
+        },
+        {
+          "id": "quiet-chip",
+          "type": "block",
+          "content": {
+            "mod": "quiet-hours",
+            "props": {
+              "role": "chip",
+              "hidden": true
+            }
+          },
+          "size": {
+            "px": 1
+          }
         },
         {
           "id": "sidebar-footer",
@@ -59,12 +79,12 @@
             }
           },
           "size": {
-            "px": 69
+            "px": 44
           }
         }
       ],
       "size": {
-        "px": 268
+        "px": 200
       },
       "min": 44,
       "max": 480,
@@ -82,9 +102,10 @@
             "mod": "my-tabs"
           },
           "size": {
-            "px": 42
+            "px": 32
           },
-          "window_drag": true
+          "window_drag": true,
+          "min": 0
         },
         {
           "id": "work-body",
@@ -98,9 +119,9 @@
                 "pane": {
                   "header": {
                     "content": {
-                      "mod": "pane"
+                      "mod": "pane-hover"
                     },
-                    "reveal": "always",
+                    "reveal": "hover",
                     "height": 30,
                     "position": "top"
                   },
@@ -155,16 +176,6 @@
           ],
           "padding": 8,
           "gap": 8
-        },
-        {
-          "id": "status",
-          "type": "block",
-          "content": {
-            "mod": "my-status"
-          },
-          "size": {
-            "px": 28
-          }
         }
       ],
       "resizable": false

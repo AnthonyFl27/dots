@@ -20,7 +20,9 @@ function toggleSidebar() {
   if (!narrow()) setShared("sidebar.width", width);
   // Mods edited before the rail went by width still read the flag.
   setShared("sidebar.collapsed", !narrow());
-  run("layout.resize", { id: "sidebar", px: narrow() ? (shared("sidebar.width") ?? 268) : window()?.platform === "macos" ? 76 : 44 });
+  const px = narrow() ? (shared("sidebar.width") ?? 200) : window()?.platform === "macos" ? 76 : 52;
+  run("layout.resize", { id: "sidebar", px });
+  run("layout.resize", { id: "sidebar-footer", px: px < 160 ? 76 : 44 });
 }
 
 export default class WorkspaceChrome extends View {
@@ -33,20 +35,24 @@ export default class WorkspaceChrome extends View {
     const t = theme();
     const collapsed = narrow();
     if (props()?.footer) {
-      const row = (id, icon, label, dim, action) => h_flex().id(id).h(28).px(8).gap(9).items_center().rounded(8)
-        .when(collapsed, el => el.relative().w(32).px(0).justify_center().tooltip(label))
-        .text_color(dim ? t.dim : t.muted).hover(s => s.bg(t.hover).text_color(t.foreground)).cursor_pointer()
-        .on_click(action).child(svg(`mods/my-chrome/${icon}.svg`).size(14))
-        .when(!collapsed, el => el.child(label));
-      const ready = div().size(6).rounded_full().bg(t.accent);
-      return v_flex().size_full().bg(t.chrome).border_t(1).border_color(t.border).px(8).pt(4).pb(8).text_size(13)
-        .when(collapsed, el => el.px(0).items_center())
-        .child(row("settings", "settings", "Settings", false, () => run("app.settings"))
-          .when(Boolean(updates().app.ready), el => el.child(collapsed ? ready.absolute().top(5).right(6) : ready)))
-        .child(row("machine", "plus", "Add machine", true, () => run("mod.open", { name: "machine-add" })));
+      // Just the gear; machines are added from Settings > Machines or ctrl+shift+k.
+      const ico = (id, label, action, ...icons) => h_flex().id(id).relative().h(28).min_w(28).px(6).gap(3).flex_none().items_center().justify_center().rounded(7)
+        .text_color(t.muted).hover(s => s.bg(t.hover).text_color(t.foreground)).cursor_pointer().tooltip(label).on_click(action)
+        .children(icons.map(i => svg(`mods/my-chrome/${i}.svg`).size(i === "plus" ? 12 : 15)));
+      const ready = div().absolute().top(3).right(3).size(6).rounded_full().bg(t.accent);
+      const settingsBtn = ico("settings", "Settings", () => run("app.settings"), "settings")
+        .when(Boolean(updates().app.ready), el => el.child(ready));
+      return (collapsed ? v_flex().items_center().justify_center().gap(4) : h_flex().items_center().gap(4).px(8))
+        .size_full().bg(t.chrome).border_t(1).border_color(t.border)
+        .child(settingsBtn);
     }
-    return h_flex().size_full().bg(t.chrome).pl(collapsed ? 6 : 14).pr(10).gap(4).items_center().text_size(13.5)
-      .when(window()?.platform === "macos" && !window()?.fullscreen && !collapsed, el => el.pl(76))
-      .when(!collapsed, el => el.child(h_flex().flex_1().gap(8).items_center().child(image("frame/welcome/herdr.png").size(20).rounded(5)).child(div().font_semibold().text_color(t.foreground).child("Herdr"))));
+    const fold = this.button("fold", svg("mods/my-chrome/panel-left.svg").size(14), toggleSidebar);
+    if (collapsed) return h_flex().size_full().bg(t.chrome).justify_center().items_center().child(fold);
+    return h_flex().size_full().bg(t.chrome).pl(14).pr(10).gap(4).items_center().text_size(13.5)
+      .when(window()?.platform === "macos" && !window()?.fullscreen, el => el.pl(76))
+      .child(h_flex().flex_1().gap(8).items_center().child(image("frame/welcome/herdr.png").size(20).rounded(5)).child(div().font_semibold().text_color(t.foreground).child("Herdr")))
+      .child(this.button("space-prev", svg("mods/my-chrome/chevron-left.svg").size(14), () => run("space.prev")))
+      .child(this.button("space-next", svg("mods/my-chrome/chevron-right.svg").size(14), () => run("space.next")))
+      .child(fold);
   }
 }

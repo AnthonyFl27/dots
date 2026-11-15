@@ -27,16 +27,18 @@
     "ctrl-8": "tab.select:8",
     "ctrl-9": "tab.select:9",
     "ctrl-shift-p": "mod.open:my-palette",
-    "ctrl-shift-k": "mod.open:picker",
+    "ctrl-shift-k": "mod.open:my-picker",
     "ctrl-b": "layout.toggle:sidebar",
     "ctrl-tab": "tab.next",
     "ctrl-alt-c": "tab.new",
     "ctrl-alt-v": "pane.split:right",
     "ctrl-alt-h": "pane.split:down",
-    "ctrl-alt-x": "pane.close",
+    "ctrl-alt-x": "mod.open:ask-close-pane",
     "ctrl-shift-up": "agent.prev",
     "ctrl-shift-down": "agent.next",
-    "f2": "tab.rename"
+    "f2": "tab.rename",
+    "ctrl-shift-w": "mod.open:ask-close-tab",
+    "ctrl-shift-q": "mod.open:ask-quit"
   },
   "terminal": {
     "ctrl-backspace": "send:\u0017",

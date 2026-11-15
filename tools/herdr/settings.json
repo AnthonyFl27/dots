@@ -3,10 +3,10 @@
   "sounds": {
     "enabled": true
   },
-  "font_ligatures": false,
-  "minimum_contrast": 1,
-  "font_size": 13,
   "font": "Iosevka",
-  "appearance": "dark",
-  "telemetry": false
+  "font_size": 12,
+  "font_ligatures": false,
+  "telemetry": false,
+  "minimum_contrast": 1,
+  "appearance": "dark"
 }
