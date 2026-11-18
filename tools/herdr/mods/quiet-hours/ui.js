@@ -10,6 +10,14 @@ import { div, svg } from "gpui-kit";
 import { h_flex, v_flex } from "gpui-base";
 import { rowName } from "./names.mjs";
 
+// The sidebar's dot grid, tiled over the whole board (512px tiles keep the grid continuous).
+function dotField(t) {
+  const tiles = [];
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++)
+    tiles.push(svg("mods/quiet-hours/dots-tile.svg").absolute().top(r * 512).left(c * 512).w(512).h(512).text_color(t.foreground + "1c"));
+  return div().absolute().top(0).left(0).size_full().overflow_hidden().children(tiles);
+}
+
 // A tone between foreground and muted (#c9c9c9 in the curfew theme); the theme has no name for it.
 // The tone of a head's label.
 function secondary(t) {
@@ -66,7 +74,7 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
       : state.nextStart
         ? `next ${hm(state.nextStart)} · ${hm(now)}`
         : hm(now);
-  const faint = (text) => div().font_family(mono).text_size(12).text_color(t.dim).child(text);
+  const faint = (text) => div().font_family(mono).text_size(14).text_color(t.dim).child(text);
 
   // An agent: its dot, its name (names.mjs: its Claude Code session's, else its tab's or
   // program's), its project faint (main.js: the git repository it works in), its status.
@@ -74,33 +82,33 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
     const working = a.status === "working";
     return h_flex()
       .id(`quiet-row-${a.address}`)
-      .h(28)
+      .h(32)
       .flex_none()
       .gap(10)
       .items_center()
       .when(a.kid, (el) => el.pl(14 * (a.depth ?? 1)))
       .child(
         working
-          ? div().w(10).flex_none().font_family(mono).text_size(13).text_color(t.muted)
+          ? div().w(10).flex_none().font_family(mono).text_size(15).text_color(t.muted)
               .frames(["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"], 90)
           : div().w(10).flex_none().flex().items_center().child(div().size(6).rounded_full().bg(t.dim)),
       )
-      .child(div().flex_none().max_w(240).truncate().text_size(13).text_color(t.muted).child(a.label ?? rowName(a)))
-      .child(div().flex_1().min_w(0).truncate().text_size(12.5).text_color(t.dim).child(a.project ?? ""))
-      .child(div().flex_none().font_family(mono).text_size(11.5).text_color(t.dim).child(WORD[a.status] ?? a.status));
+      .child(div().flex_none().max_w(300).truncate().text_size(15).text_color(t.muted).child(a.label ?? rowName(a)))
+      .child(div().flex_1().min_w(0).truncate().text_size(14.5).text_color(t.dim).child(a.project ?? ""))
+      .child(div().flex_none().font_family(mono).text_size(13.5).text_color(t.dim).child(WORD[a.status] ?? a.status));
   };
 
   const ghost = (id, text, action) =>
     div()
       .id(id)
-      .h(30)
+      .h(34)
       .px(14)
       .flex()
       .items_center()
       .rounded(6)
       .border(1)
       .border_color(t.border)
-      .text_size(12.5)
+      .text_size(14.5)
       .text_color(t.muted)
       .cursor_pointer()
       .hover((s) => s.border_color(t.input))
@@ -111,14 +119,16 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
   return v_flex()
     .id("quiet-board")
     .size_full()
+    .relative()
     .bg(t.chrome)
+    .child(dotField(t))
     .pt(56)
     .pb(28)
     .px(40)
     .child(
       v_flex()
         .w_full()
-        .max_w(560)
+        .max_w(640)
         .mx_auto()
         .flex_1()
         .min_h(0)
@@ -128,7 +138,7 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
             .flex_none()
             .justify_between()
             .items_center()
-            .child(div().font_family(mono).text_size(12).text_color(secondary(t)).child("QUIET"))
+            .child(div().font_family(mono).text_size(14).text_color(secondary(t)).child("QUIET"))
             .child(faint(clock)),
         )
         .child(
@@ -136,7 +146,7 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
             .child(faint(countLine(agents.filter((a) => !a.kid))))
             .when(Boolean(onSort), (el) => el.child(
               div().id("quiet-sort").flex_none().h(24).px(8).flex().items_center().gap(6).rounded(6).cursor_pointer()
-                .text_size(11.5).text_color(t.dim).hover((s) => s.bg(t.hover).text_color(t.muted))
+                .text_size(13.5).text_color(t.dim).hover((s) => s.bg(t.hover).text_color(t.muted))
                 .tooltip("Sort agents").on_mouse_down("left", (_e, cx) => cx.stop_propagation()).on_click(onSort)
                 .child(svg(`mods/workspace-chrome/${sort === "grouped" ? "layers" : "clock"}.svg`).size(13))
                 .child(sort === "grouped" ? "By space" : "Priority"))),
@@ -144,7 +154,7 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
         .child(v_flex().id("quiet-rows").flex_1().min_h(0).overflow_y_scroll().children(
           agents.flatMap((a, i) => {
             const head = a.group && a.group !== agents[i - 1]?.group
-              ? [div().flex_none().h(26).mt(i ? 8 : 0).flex().items_end().font_family(mono).text_size(11).text_color(t.dim).child(a.group.toUpperCase())]
+              ? [div().flex_none().h(26).mt(i ? 8 : 0).flex().items_end().font_family(mono).text_size(13).text_color(t.dim).child(a.group.toUpperCase())]
               : [];
             return [...head, row(a)];
           })))
@@ -157,7 +167,7 @@ export function board({ t, mono, state, now, agents, sort, onSort, error, onUnlo
             .when(quiet && !unlocked && manual, (el) => el.child(ghost("quiet-end", "end quiet", onEnd)))
             .when(unlocked, (el) => el.child(faint(`unlocked · ${minutesLeft(state, now)}m left`))),
         )
-        .when(Boolean(error), (el) => el.child(div().flex_none().truncate().text_size(11.5).text_color(t.dim).child(error))),
+        .when(Boolean(error), (el) => el.child(div().flex_none().truncate().text_size(13.5).text_color(t.dim).child(error))),
     );
 }
 

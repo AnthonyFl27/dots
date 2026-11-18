@@ -7,6 +7,13 @@ import { v_flex, h_flex } from "gpui-base";
 import { spaces, agents, machines, run, openOverlay, setAgentOrder, setShared, shared, theme, props, terminals, layout, panes } from "herdr";
 
 const ICON = "mods/my-chrome/";
+
+// Each section paints its own dot grid from its own corner, so the sections read as separate panels.
+function dotted(t, el, tint) {
+  return div().size_full().relative().overflow_hidden().when(Boolean(tint), (d) => d.bg(tint))
+    .child(svg("mods/my-tree/dots.svg").absolute().top(0).left(0).w(480).h(1400).text_color(t.foreground + "1c"))
+    .child(el);
+}
 const key = (m) => m ?? "";
 function find(node, id) {
   if (node?.id === id) return node;
@@ -193,7 +200,7 @@ export default class Tree extends View {
         rows.push(...card(a));
       }
     } else rows = ags.flatMap(card);
-    return v_flex().id("agents-panel").size_full().bg(t.chrome).border_t(1).border_color(t.border).px(8).pt(8).pb(8).overflow_y_scrollbar()
+    return dotted(t, v_flex().id("agents-panel").size_full().border_t(1).border_color(t.border).px(8).pt(8).pb(8).overflow_y_scrollbar()
       .child(h_flex().h(24).px(8).gap(6).items_center().text_size(10.5).font_semibold().text_color(t.dim)
         .child(div().flex_1().child(`AGENTS · ${ags.length}`))
         .when(hot > 0, (el) => el.child(div().text_color(t.ansi1).child(`${hot} needs you`)))
@@ -203,7 +210,7 @@ export default class Tree extends View {
           .on_click(() => openOverlay({ mod: "agents", kind: "popup", width: 200, height: 140, props: { sortMenu: true } }))
           .child(svg("mods/workspace-chrome/layers.svg").size(14))))
       .when(!ags.length, (el) => el.child(div().px(8).py(6).text_size(12).text_color(t.dim).child("No agents running")))
-      .children(rows);
+      .children(rows), t.foreground + "07");
   }
 
   // The folded sidebar (44 px): one icon per space, or per agent with its status dot.
@@ -225,7 +232,7 @@ export default class Tree extends View {
           return item(`rs:${s.id}`, [s.name, ...tabs.map((n) => `· ${n}`)].join("\n"), s.active,
             () => run("space.select", { id: s.id }), label, s.status, s);
         });
-    return v_flex().id("rail").size_full().bg(t.chrome).items_center().pt(6).gap(2).overflow_y_scrollbar().children(items);
+    return dotted(t, v_flex().id("rail").size_full().items_center().pt(6).gap(2).overflow_y_scrollbar().children(items));
   }
 
   render() {
@@ -250,6 +257,6 @@ export default class Tree extends View {
       }) : [];
       return v_flex().child(this.machineRow(t, m, list)).children(rows);
     });
-    return v_flex().id("tree").size_full().bg(t.chrome).px(8).pt(2).pb(8).overflow_y_scrollbar().children(groups);
+    return dotted(t, v_flex().id("tree").size_full().px(8).pt(2).pb(8).overflow_y_scrollbar().children(groups));
   }
 }
